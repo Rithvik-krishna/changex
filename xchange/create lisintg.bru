@@ -1,0 +1,26 @@
+meta {
+  name: create lisintg
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:5000/api/listings
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Header eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzkxYzMxOTExNmNiMGY5NDk5MWFlMiIsImlhdCI6MTc0ODU3MzY5MiwiZXhwIjoxNzUxMTY1NjkyfQ.Lx-YaK61-YcvWcrD3AjcIJs7p0mCZT3mni5igE5GXr8
+}
+
+body:json {
+  {
+    "title": "Old guitar",
+    "description": "Used but in good condition",
+    "category": "items",
+    "location": "Mumbai",
+    "type": "item"
+  }
+  
+}
