@@ -3,13 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-// Route imports
 const authRoutes = require('./routes/auth');
 const listingRoutes = require('./routes/listings');
 const tradeRoutes = require('./routes/trades');
 const wishlistRoutes = require('./routes/wishlist');
 const reviewRoutes = require('./routes/reviews'); // ✅
-
 
 const app = express();
 app.use(cors());
@@ -22,9 +20,6 @@ app.use('/api/trades', tradeRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/reviews', reviewRoutes); // ✅
 app.use('/api/wishlist', require('./routes/wishlist'));
-
-
-
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

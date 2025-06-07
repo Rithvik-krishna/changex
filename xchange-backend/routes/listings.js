@@ -1,25 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/authMiddleware');
 const {
   createListing,
   getListings,
   getListing,
   updateListing,
   deleteListing,
-  getMyListings // <-- add this!
+  getMyListings
 } = require('../controllers/listingController');
-const authMiddleware = require('../middleware/authMiddleware');
 
-// Protected routes
-router.post('/', authMiddleware, createListing);
-router.put('/:id', authMiddleware, updateListing);
-router.delete('/:id', authMiddleware, deleteListing);
-
-// NEW: Get my listings (protected)
-router.get('/mine', authMiddleware, getMyListings);
-
-// Public routes
+// Public
 router.get('/', getListings);
 router.get('/:id', getListing);
+
+// Protected
+router.post('/', auth, createListing);
+router.put('/:id', auth, updateListing);
+router.delete('/:id', auth, deleteListing);
+router.get('/mine', auth, getMyListings);
 
 module.exports = router;

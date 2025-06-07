@@ -38,7 +38,7 @@ exports.getListing = async (req, res) => {
 exports.updateListing = async (req, res) => {
   try {
     const listing = await Listing.findOneAndUpdate(
-      { _id: req.params.id, owner: req.user.id },
+      { _id: req.params.id, owner: req.user._id },
       req.body,
       { new: true }
     );
@@ -52,13 +52,14 @@ exports.updateListing = async (req, res) => {
 // Delete Listing
 exports.deleteListing = async (req, res) => {
   try {
-    const listing = await Listing.findOneAndDelete({ _id: req.params.id, owner: req.user.id });
+    const listing = await Listing.findOneAndDelete({ _id: req.params.id, owner: req.user._id });
     if (!listing) return res.status(404).json({ error: 'Listing not found or not yours' });
-    res.json({ message: 'Listing deleted' });
+    res.json({ message: 'Listing deleted successfully' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete listing' });
   }
 };
+
 
 // Get Listings Owned By Current User
 exports.getMyListings = async (req, res) => {
